@@ -76,22 +76,17 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
-  printf("%s\n",args);
-  char n1;
+  int  n1;
   int  n2;
-  long int n3;
-  unsigned long int n=1;
   if(args!=NULL){
-    sscanf(args,"%s %d %lx",&n1,&n2,&n3);
-    for(int i=0;i<n2;i++){
-      n+=n3;
-      printf("%lx",n);
-    }
+    sscanf(args,"%d %d",&n1,&n2);
+    printf("%d %d\n",n1,n2);
+    
   }
   return 0;
 }
 
-/*名称、描述和处理函数结合在一起的结构体*/
+/*指令的名称、指令的描述、指令的处理函数结合在一起的结构体*/
 static struct {
   const char *name;
   const char *description;
