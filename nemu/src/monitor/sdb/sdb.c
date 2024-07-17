@@ -67,12 +67,9 @@ static int cmd_si(char *args){
 
 static int cmd_info(char *args){
   printf("%s\n",args);
-  
-  char n1;
-  char n2;
+
   if(args!=NULL){
-    sscanf(args,"%s %s",&n1,&n2);
-    if(n2=='r'){
+    if(*args=='r'){
       isa_reg_display();
     }
   }
