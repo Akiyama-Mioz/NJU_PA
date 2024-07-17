@@ -75,6 +75,8 @@ static int cmd_info(char *args){
   return 0;
 }
 
+word_t vaddr_read(vaddr_t addr, int len);
+
 static int cmd_x(char *args){
   int  n1;
   unsigned int  n2;
@@ -82,7 +84,7 @@ static int cmd_x(char *args){
     sscanf(args,"%d %x",&n1,&n2);
     for(int i=0;i<n1;i++){
       n2+=i*4;
-      //printf("0x%x: 0x%x\n",n2,pmem_read(n2,4));
+      printf("0x%x: 0x%x\n",n2,vaddr_read(n2,4));
     } 
   }
   return 0;
@@ -101,7 +103,6 @@ static struct {
   {"info","Print the information of registers",cmd_info},
   {"x","Calculate the expression",cmd_x},
   /* TODO: Add more commands */
-
 };
 
 #define NR_CMD ARRLEN(cmd_table)
