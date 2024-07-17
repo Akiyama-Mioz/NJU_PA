@@ -55,12 +55,15 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 static int cmd_si(char *args){
-  int n;
+  char n1;
+  int n2;
   if(args!=NULL){
-    sscanf(args,"%*s %d",&n);
-    cpu_exec(n);
+    sscanf(args,"%s %d",&n1,&n2);
+    for(int i=0;i<n2;i++){
+      cpu_exec(1);
+    }
   }
-  return 0;   
+  return 0;
 }
 
 static int cmd_info(char *args){
@@ -75,7 +78,7 @@ static int cmd_info(char *args){
   return 0;
 }
 
-static int cmd_expr(char *args){
+static int cmd_x(char *args){
   char n1;
   int  n2;
   long int n3;
@@ -99,10 +102,9 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  {"si","Let the program step through N instructions and then pause,It defaults to 1 when N is not given",cmd_si},
-  {"info","info r Print the register status,info w Print the monitoring point information",cmd_info},
-  {"expr","Start at the starting memory address,output N consecutive 4-bytes in hexadecimal form",cmd_expr},
-  
+  {"si","Single step execution",cmd_si},
+  {"info","Print the information of registers",cmd_info},
+  {"expr","Calculate the expression",cmd_x},
   /* TODO: Add more commands */
 
 };
