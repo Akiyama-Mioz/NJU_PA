@@ -99,9 +99,10 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  {"si[N]","Let the program step through N instructions and then pause,It defaults to 1 when N is not given",cmd_si},
-  {"info SUBCMD","info r Print the register status,info w Print the monitoring point information",cmd_info},
-  {"x N EXPR","Start at the starting memory address,output N consecutive 4-bytes in hexadecimal form",cmd_expr},
+  {"si","Let the program step through N instructions and then pause,It defaults to 1 when N is not given",cmd_si},
+  {"info","info r Print the register status,info w Print the monitoring point information",cmd_info},
+  {"expr","Start at the starting memory address,output N consecutive 4-bytes in hexadecimal form",cmd_expr},
+  
   /* TODO: Add more commands */
 
 };
