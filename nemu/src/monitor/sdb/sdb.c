@@ -56,15 +56,11 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args){
   printf("%s\n",args);
-  int n;
-  char s[2];
+  int n = *args;
   if(args!=NULL){
-    sscanf(args,"%s %d",s,&n);
-    //for(int i=0;i<n;i++){
-    //  cpu_exec(1);
-    //}
-    printf("n=%d\n",n);
-    
+    for(int i=0;i<n;i++){
+      cpu_exec(1);
+    }
   }
   return 0;
 }
