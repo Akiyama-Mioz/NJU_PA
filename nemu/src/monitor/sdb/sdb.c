@@ -80,7 +80,7 @@ static int cmd_x(char *args){
   unsigned int  n2;
   if(args!=NULL){
     sscanf(args,"%d %x",&n1,&n2);
-    printf("%d %d\n",n1,n2);
+    printf("%d %x\n",n1,n2);
     
   }
   return 0;
