@@ -19,7 +19,7 @@
 #include <readline/history.h>
 #include "sdb.h"
 
-static int is_batch_mode = false;
+static int is_batch_mode = false;//程序是否自动执行,false为否
 
 void init_regex();
 void init_wp_pool();
@@ -54,9 +54,43 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args){
+  int n;
+  if(args!=NULL){
+    sscanf(args,"%*s %d",&n);
+    cpu_exec(n);
+  }
+  return 0;   
+}
 
+static int cmd_info(char *args){
+  char n1;
+  char n2;
+  if(args!=NULL){
+    sscanf(args,"%s %s",&n1,&n2);
+    if(n2=='r'){
+      isa_reg_display();
+    }
+  }
+  return 0;
+}
 
+static int cmd_expr(char *args){
+  char n1;
+  int  n2;
+  long int n3;
+  unsigned long int n=1;
+  if(args!=NULL){
+    sscanf(args,"%s %d %lx",&n1,&n2,&n3);
+    for(int i=0;i<n2;i++){
+      n+=n3;
+      printf("%lx",n);
+    }
+  }
+  return 0;
+}
 
+/*名称、描述和处理函数结合在一起的结构体*/
 static struct {
   const char *name;
   const char *description;
@@ -65,7 +99,9 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  {"si"}
+  {"si[N]","Let the program step through N instructions and then pause,It defaults to 1 when N is not given",cmd_si},
+  {"info SUBCMD","info r Print the register status,info w Print the monitoring point information",cmd_info},
+  {"x N EXPR","Start at the starting memory address,output N consecutive 4-bytes in hexadecimal form",cmd_expr},
   /* TODO: Add more commands */
 
 };
@@ -94,7 +130,7 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
-
+/*改变程序的模式，调用这个函数会使得程序自动执行 */
 void sdb_set_batch_mode() {
   is_batch_mode = true;
 }
