@@ -76,6 +76,7 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
+  printf("%s\n",args);
   char n1;
   int  n2;
   long int n3;
