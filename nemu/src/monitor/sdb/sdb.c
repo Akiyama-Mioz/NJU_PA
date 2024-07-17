@@ -80,8 +80,10 @@ static int cmd_x(char *args){
   unsigned int  n2;
   if(args!=NULL){
     sscanf(args,"%d %x",&n1,&n2);
-    printf("%d %x\n",n1,n2);
-    
+    for(int i=0;i<n1;i++){
+      n2+=i*4;
+      //printf("0x%x: 0x%x\n",n2,pmem_read(n2,4));
+    } 
   }
   return 0;
 }
