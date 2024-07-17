@@ -55,7 +55,7 @@ static int cmd_q(char *args) {
 static int cmd_help(char *args);
 
 static int cmd_si(char *args){
-  printf("%s\n",args);
+  printf("%s\n",args);//如果定义一个指向字符串的指针，那么这个指针指向的是一个字符串的首地址，打印时也只需要地址
 
   if(args!=NULL){
     for(int i=0;i<(*args-48);i++){
@@ -66,6 +66,8 @@ static int cmd_si(char *args){
 }
 
 static int cmd_info(char *args){
+  printf("%s\n",args);
+  
   char n1;
   char n2;
   if(args!=NULL){
