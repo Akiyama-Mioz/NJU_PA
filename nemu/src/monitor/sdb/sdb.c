@@ -56,10 +56,9 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args){
   printf("%s\n",args);
-  int n = *args;
-  printf("%d\n",n);
+
   if(args!=NULL){
-    for(int i=0;i<n;i++){
+    for(int i=0;i<(*args-48);i++){
       cpu_exec(1);
     }
   }
