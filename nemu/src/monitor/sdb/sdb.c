@@ -61,7 +61,7 @@ static int cmd_si(char *args){
     for(int i=0;i<n;i++){
       cpu_exec(i);
     }
-     
+    printf("%d",n);
   }
   return 0;
 }
