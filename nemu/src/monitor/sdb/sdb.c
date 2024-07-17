@@ -59,9 +59,7 @@ static int cmd_si(char *args){
   int n2;
   if(args!=NULL){
     sscanf(args,"%s %d",&n1,&n2);
-    for(int i=0;i<n2;i++){
-      cpu_exec(1);
-    }
+      cpu_exec(n2);   
   }
   return 0;
 }
