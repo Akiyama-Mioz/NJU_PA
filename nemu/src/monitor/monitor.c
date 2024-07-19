@@ -97,9 +97,9 @@ static int parse_args(int argc, char *argv[]) {
 }
 
 void init_monitor(int argc, char *argv[]) {
-  /* Perform some global initialization. */
+  /* Perform some global initialization. *///执行全局初始化
 
-  /* Parse arguments. */
+  /* Parse arguments. *///解析参数
   parse_args(argc, argv);
 
   /* Set random seed. */
