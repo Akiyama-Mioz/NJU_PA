@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 256, TK_EQ,TK_NUM
 
   /* TODO: Add more token types */
 
@@ -38,10 +38,16 @@ static struct rule {
 
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
+  {"\\-", '-'},         // minus
+  {"\\*", '*'},         // multiply
+  {"\\/", '/'},         // divide
+  {"\\(", '('},         // left bracket
+  {"\\)", ')'},         // right bracket
+  {"[0-9]+", TK_NUM},// number
   {"==", TK_EQ},        // equal
 };
 
-#define NR_REGEX ARRLEN(rules)
+#define NR_REGEX ARRLEN(rules)//计算数组长度
 
 static regex_t re[NR_REGEX] = {};
 
@@ -54,7 +60,7 @@ void init_regex() {
   int ret;
 
   for (i = 0; i < NR_REGEX; i ++) {
-    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
+    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);//
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
