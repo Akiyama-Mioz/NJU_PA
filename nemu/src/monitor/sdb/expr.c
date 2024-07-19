@@ -60,7 +60,7 @@ void init_regex() {
   int ret;
 
   for (i = 0; i < NR_REGEX; i ++) {
-    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);//regcomp函数将字符串形式的正则表达式编译成regex_t类型，然后给regexec使用
+    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);//regcomp函数将字符串形式的正则表达式编译成regex_t类型储存在re[i]，然后给regexec使用
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
@@ -100,15 +100,15 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
         switch (rules[i].token_type) {
-          case TK_NOTYPE: ;
-          case '+' : ;
-          case '-' : ;
-          case '*' : ;
-          case '/' : ;
-          case '(' : ;
-          case ')' : ;
-          case TK_NUM : ;
-          case TK_EQ : ;
+          case TK_NOTYPE : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case '+' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case '-' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case '*' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case '/' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case '(' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case ')' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case TK_NUM : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case TK_EQ : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
           default : TODO();
         }
 
