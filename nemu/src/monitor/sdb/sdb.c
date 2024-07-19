@@ -56,9 +56,9 @@ static int cmd_help(char *args);
 
 static int cmd_si(char *args){
   printf("%s\n",args);//如果定义一个指向字符串的指针，那么这个指针指向的是一个字符串的首地址，打印时也只需要地址
-
+  int n=atoi(args);
   if(args!=NULL){
-    for(int i=0;i<(*args-48);i++){
+    for(int i=0;i<n;i++){
       cpu_exec(1);
     }
   }
