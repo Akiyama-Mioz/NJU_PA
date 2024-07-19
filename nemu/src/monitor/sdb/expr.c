@@ -49,7 +49,7 @@ static struct rule {
 
 #define NR_REGEX ARRLEN(rules)//计算数组长度
 
-static regex_t re[NR_REGEX] = {};
+static regex_t re[NR_REGEX] = {};//储存编译后的正则表达式类型
 
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
@@ -60,7 +60,7 @@ void init_regex() {
   int ret;
 
   for (i = 0; i < NR_REGEX; i ++) {
-    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);//
+    ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);//regcomp函数将字符串形式的正则表达式编译成regex_t类型，然后给regexec使用
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
       panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
@@ -79,7 +79,7 @@ static int nr_token __attribute__((used))  = 0;
 static bool make_token(char *e) {
   int position = 0;
   int i;
-  regmatch_t pmatch;
+  regmatch_t pmatch;//正则表达式库中定义的一个结构体类型,用来存放匹配的字符串开始和结束的信息
 
   nr_token = 0;
 
@@ -99,9 +99,17 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
         switch (rules[i].token_type) {
-          default: TODO();
+          case TK_NOTYPE: ;
+          case '+' : ;
+          case '-' : ;
+          case '*' : ;
+          case '/' : ;
+          case '(' : ;
+          case ')' : ;
+          case TK_NUM : ;
+          case TK_EQ : ;
+          default : TODO();
         }
 
         break;
