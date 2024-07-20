@@ -99,19 +99,21 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+        
+
         switch (rules[i].token_type) {
-          case TK_NOTYPE : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case '+' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case '-' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case '*' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case '/' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case '(' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case ')' : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case TK_NUM : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
-          case TK_EQ : tokens[i].type=TK_NOTYPE;tokens[i].str[0]+=1;break;
+          case TK_NOTYPE : tokens[nr_token].type=TK_NOTYPE;break;
+          case '+' : tokens[nr_token].type='+';break;
+          case '-' : tokens[nr_token].type='-';break;
+          case '*' : tokens[nr_token].type='*';break;
+          case '/' : tokens[nr_token].type='/';break;
+          case '(' : tokens[nr_token].type='(';break;
+          case ')' : tokens[nr_token].type=')';break;
+          case TK_NUM : tokens[nr_token].type=TK_NUM;tokens[i].str[0]=rules[i].token_type;break;
+          case TK_EQ : tokens[nr_token].type=TK_EQ;break;
           default : TODO();
         }
-
+        nr_token++;
         break;
       }
     }
