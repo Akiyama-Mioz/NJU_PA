@@ -28,7 +28,7 @@ void isa_reg_display() {
   int size = sizeof(regs)/sizeof(regs[0]);
   for(int i=0;i<size;i++){
 
-      printf("%s:%x\n",regs[i],cpu.gpr[check_reg_idx(i)]);
+      printf("%s:%x\n",regs[i],cpu.gpr[i]);
   } 
 }
 
