@@ -90,6 +90,14 @@ static int cmd_x(char *args){
   return 0;
 }
 
+static int cmd_p(char *args){
+  bool success;
+  if(args!=NULL){
+    printf("%d\n",expr(args,&success));
+  }
+  return 0;
+}
+
 /*指令的名称、指令的描述、指令的处理函数结合在一起的结构体*/
 static struct {
   const char *name;
@@ -102,7 +110,7 @@ static struct {
   {"si","Single step execution",cmd_si},
   {"info","Print the information of registers",cmd_info},
   {"x","Calculate the expression",cmd_x},
-  /* TODO: Add more commands */
+  {"p","Print the expression",cmd_p},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
