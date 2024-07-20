@@ -127,13 +127,84 @@ static bool make_token(char *e) {
   return true;
 }
 
+bool check_parentheses(int p,int q){
+  if(p =='(' && q ==')'){
+     return true;
+  }
+  return false;
+}
+typedef struct {
+  int op;
+  int op_token;
+}op;
+
+op main_operator(){
+  int parentheses = 0;//设计一个括号标记符，用于追踪括号
+  op val;
+  val.op=0;
+  val.op_token=0;
+  for(int i=0;i<nr_token;i++){
+    if(tokens[i].type == '('){
+        ++parentheses;
+        continue;
+    } 
+    if(tokens[i].type == ')'){
+        --parentheses;
+        continue;
+    } 
+    if(parentheses==0){
+      switch(tokens[i].type){
+        case '+' : val.op=tokens[i].type;break;
+        case '-' : val.op=tokens[i].type;break;
+      }
+      val.op_token = i;
+    }
+    if(parentheses==0 && val.op==0){
+      switch(tokens[i].type){
+        case '*' : val.op=tokens[i].type;break;
+        case '/' : val.op=tokens[i].type;break;
+      }
+      val.op_token = i;
+    }
+
+  }
+  return val;
+}
+
+uint32_t eval(){
+  if(tokens[0].type > tokens[nr_token].type){
+    return 0;
+  }
+  if(tokens[0].type == tokens[nr_token].type){
+    return tokens[0].type;
+  }
+  if(check_parentheses(tokens[0].type,tokens[nr_token].type) == true){
+    return eval(tokens[0].type+1,tokens[nr_token].type-1);
+  }
+  else{
+    op val = main_operator();
+    int op=val.op;
+    int op_token=val.op_token;
+    int val1 = eval(tokens[0].type,op - 1);
+    int val2 = eval(op + 1,tokens[nr_token].type);
+
+    switch (op_token){
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;
+      case '*': return val1 * val2;
+      case '/': return val1 / val2;
+      default: assert(0); 
+    }
+
+  }
+}
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
-  }
-
+  } 
+  eval();
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
