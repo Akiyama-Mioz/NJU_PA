@@ -65,6 +65,7 @@ static int cmd_si(char *args){
   return 0;
 }
 
+/*打印寄存器的信息*/
 static int cmd_info(char *args){
 
   if(args!=NULL){
@@ -76,6 +77,8 @@ static int cmd_info(char *args){
 }
 
 word_t vaddr_read(vaddr_t addr, int len);
+
+/*扫描内存*/
 
 static int cmd_x(char *args){
   int  n1;
