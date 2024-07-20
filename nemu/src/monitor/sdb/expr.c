@@ -100,7 +100,7 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
         
-
+        printf("%d",rules[i].token_type);
         switch (rules[i].token_type) {
           case TK_NOTYPE : tokens[nr_token].type=TK_NOTYPE;
           printf("%d",rules[i].token_type);break;
