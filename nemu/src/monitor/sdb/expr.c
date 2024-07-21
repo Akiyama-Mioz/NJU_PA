@@ -198,13 +198,13 @@ uint32_t eval(int p,int q){
 }
 
 word_t expr(char *e, bool *success) {
+  int sum;
   if (!make_token(e)) {
     *success = false;
     return 0;
   } 
-  eval(0,nr_token-1);
+  sum = eval(0,nr_token-1);
   /* TODO: Insert codes to evaluate the expression. */
-  //TODO();
-
-  return 0;
+  
+  return sum;
 }
