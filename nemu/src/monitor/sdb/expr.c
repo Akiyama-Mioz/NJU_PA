@@ -180,7 +180,7 @@ uint32_t eval(int p,int q){
   }
   else{
     int op = main_operator();
-//    printf("%d\n",op);
+    printf("%d\n",op);
     int val1 = eval(p,op-1);
     printf("%d\n",val1);
     int val2 = eval(op+1,q);
