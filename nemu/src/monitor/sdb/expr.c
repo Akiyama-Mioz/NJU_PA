@@ -178,7 +178,7 @@ uint32_t eval(int p,int q){
   }
   else{
     int op = main_operator();
-
+    printf("op = %d\n",op);
     int val1 = eval(tokens[p].type,tokens[op-1].type);
     int val2 = eval(tokens[op+1].type,tokens[nr_token].type);
 
