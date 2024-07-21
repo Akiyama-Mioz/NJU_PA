@@ -182,6 +182,7 @@ uint32_t eval(int p,int q){
   }
   else{
     int op = main_operator(p,q);
+    assert(0);
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
     int val2 = eval(op+1,q);
