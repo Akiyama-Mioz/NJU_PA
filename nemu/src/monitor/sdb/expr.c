@@ -190,7 +190,7 @@ uint32_t eval(int p,int q){
       case '-': return val1 - val2;break;
       case '*': return val1 * val2;break;
       case '/': return val1 / val2;break;
-      default: assert(0); 
+      default: printf("%d",tokens[op].type);assert(0); 
     }
 
   }
