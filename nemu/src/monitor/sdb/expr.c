@@ -171,15 +171,16 @@ uint32_t eval(int p,int q){
     return 0;
   }
   else if(p == q){
+    printf("val1 = %d\n",tokens[p].type);
     return tokens[p].type;
   }
   else if(check_parentheses(0,nr_token) == true){
-    return eval(0+1,nr_token-1);
+    return eval(p+1,nr_token-1);
   }
   else{
     int op = main_operator();
     printf("op = %d\n",op);
-    int val1 = eval(tokens[0].type,tokens[op-1].type);
+    int val1 = eval(tokens[p].type,tokens[op-1].type);
     int val2 = eval(tokens[op+1].type,tokens[nr_token].type);
     printf("val1 = %d  val2 = %d\n",val1,val2);
     assert(0);
