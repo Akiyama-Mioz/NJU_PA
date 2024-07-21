@@ -184,7 +184,7 @@ uint32_t eval(int p,int q){
     int op = main_operator();
     printf("%d\n",op);
     int val1 = eval(p,op-1);
-    //assert(0);
+    assert(0);
     printf("%d\n",val1);
     int val2 = eval(op+1,q);
     printf("%d\n",val2);
