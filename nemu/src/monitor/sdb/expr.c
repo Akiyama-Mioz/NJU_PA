@@ -185,7 +185,6 @@ uint32_t eval(int p,int q){
     int op =nr_token+1;
     op = main_operator(op-1);
     printf("%d  %d  %d  %d\n",p,op-1,op+1,q);
-    assert(0);
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
     int val2 = eval(op+1,q);
