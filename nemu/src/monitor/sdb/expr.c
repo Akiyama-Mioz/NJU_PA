@@ -205,6 +205,6 @@ word_t expr(char *e, bool *success) {
   } 
   sum = eval(0,nr_token-1);
   /* TODO: Insert codes to evaluate the expression. */
-  
+  assert(0);
   return sum;
 }
