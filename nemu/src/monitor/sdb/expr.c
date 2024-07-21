@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,TK_NUM
+  TK_NOTYPE = 256, TK_EQ=255,TK_NUM=254,
 
   /* TODO: Add more token types */
 
@@ -113,6 +113,7 @@ static bool make_token(char *e) {
           default : {
               tokens[nr_token].type=rules[i].token_type;
               strncpy(tokens[nr_token].str,substr_start,substr_len);
+              printf("%s\n",tokens[nr_token].str);
               nr_token++;
               break;
           }
@@ -171,19 +172,15 @@ uint32_t eval(int p,int q){
     return 0;
   }
   else if(p == q){
-    printf("p = %d  val1 = %d\n",p,tokens[p].type);
-    return tokens[p].type;
+    return atoi(tokens[p].str);
   }
   else if(check_parentheses(0,nr_token) == true){
     return eval(p+1,nr_token-1);
   }
   else{
     int op = main_operator();
-    printf("op = %d\n",op);
     int val1 = eval(tokens[p].type,tokens[op-1].type);
     int val2 = eval(tokens[op+1].type,tokens[nr_token].type);
-    printf("val1 = %d  val2 = %d\n",val1,val2);
-    assert(0);
     switch (tokens[op].type){
       case '+': return val1 + val2;break;
       case '-': return val1 - val2;break;
