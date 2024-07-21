@@ -168,6 +168,7 @@ int main_operator(){
 }
 
 uint32_t eval(int p,int q){
+  int sum = 0;
   if(p > q){
     return 0;
   }
@@ -186,14 +187,14 @@ uint32_t eval(int p,int q){
     printf("%d\n",val2);
     printf("%s\n",tokens[op].str);
     switch (tokens[op].type){
-      case 43: return val1+val2;
-      case '-': return val1-val2;
-      case '*': return val1*val2;
-      case '/': return val1/val2;
-      default: printf("%d",tokens[op].type);assert(0);
+      case 43 : sum = val1+val2;
+      case '-': sum = val1-val2;
+      case '*': sum = val1*val2;
+      case '/': sum = val1/val2;
+      default: printf("%d",tokens[op].type);break;
     }
-
   }
+  return sum;
 }
 
 word_t expr(char *e, bool *success) {
