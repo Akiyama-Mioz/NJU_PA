@@ -180,13 +180,13 @@ uint32_t eval(int p,int q){
     return atoi(tokens[p].str);
   }
   else if(check_parentheses(p,q) == true){
-    printf("p = %d, q = %d\n",p+1,q-1);
     return eval(p+1,q-1);
   }
   else{
     int op = main_operator(p,q);
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
+    assert(0);
     int val2 = eval(op+1,q);
     printf("val2 = %d\n",val2);
    switch (tokens[op].type){
