@@ -132,7 +132,6 @@ static bool make_token(char *e) {
 }
 
 bool check_parentheses(int p,int q){
-  printf("p = %d, q = %d\n",p,q);
   if(tokens[p].type =='(' &&  tokens[q].type==')'){
      printf("true\n");
      return true;
@@ -181,7 +180,6 @@ uint32_t eval(int p,int q){
     return atoi(tokens[p].str);
   }
   else if(check_parentheses(p,q) == true){
-    printf("p = %d, q = %d\n",p+1,q-1);
     return eval(p+1,q-1);
   }
   else{
