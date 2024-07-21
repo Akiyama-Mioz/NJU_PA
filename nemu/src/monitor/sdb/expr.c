@@ -43,7 +43,7 @@ static struct rule {
   {"\\/", '/'},         // divide
   {"\\(", '('},         // left bracket
   {"\\)", ')'},         // right bracket
-  {"[0-9]+", TK_NUM},// number
+  {"\\b[0-9]+\\b", TK_NUM},// number
   {"==", TK_EQ},        // equal
 };
 
@@ -139,7 +139,7 @@ bool check_parentheses(int p,int q){
 
 int main_operator(){
   int parentheses = 0;//设计一个括号标记符，用于追踪括号
-  int mmop=1;
+  int mmop=0;
   int op = 0;
   for(int i=0;i<nr_token;i++){
     if(tokens[i].type == '('){
@@ -182,6 +182,7 @@ uint32_t eval(int p,int q){
   else{
     int op = main_operator();
     int val1 = eval(p,op-1);
+    printf("val1 = %d\n",val1);
     int val2 = eval(op+1,q);
     switch (tokens[op].type){
       case '+':{sum = val1+val2;break;}
