@@ -172,7 +172,6 @@ uint32_t eval(int p,int q){
     return 0;
   }
   else if(p == q){
-
     return atoi(tokens[p].str);
   }
   else if(check_parentheses(0,nr_token) == true){
@@ -186,7 +185,6 @@ uint32_t eval(int p,int q){
     int val2 = eval(op+1,q);
     printf("%d\n",val2);
     printf("%d\n",tokens[op].type);
-    printf("%d\n",'+');
     switch (tokens[op].type){
       case '+': return val1+val2;
       case '-': return val1-val2;
