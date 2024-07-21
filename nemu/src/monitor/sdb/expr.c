@@ -173,6 +173,7 @@ int main_operator(int p,int q){
 
 uint32_t eval(int p,int q){
   int sum = 0;
+  int op = main_operator(p,q);
   if(p > q){
     return 0;
   }
@@ -183,7 +184,6 @@ uint32_t eval(int p,int q){
     return eval(p+1,q-1);
   }
   else{
-    int op = main_operator(p,q);
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
     assert(0);
