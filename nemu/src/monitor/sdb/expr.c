@@ -202,11 +202,13 @@ word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
     *success = false;
     return 0;
-  } 
+  }
+  printf("%d\n",nr_token);
+
   for(int i=0;i<nr_token;i++){
     printf("%s\n",tokens[i].str);
   }
-  printf("%d",nr_token);
+  
   assert(0);
   sum = eval(0,nr_token-1);
   /* TODO: Insert codes to evaluate the expression. */
