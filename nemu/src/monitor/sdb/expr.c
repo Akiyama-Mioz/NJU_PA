@@ -140,6 +140,7 @@ bool check_parentheses(int p,int q){
 
 int main_operator(){
   int parentheses = 0;//设计一个括号标记符，用于追踪括号
+  int mmop=0;
   int op = 0;
   for(int i=0;i<nr_token;i++){
     if(tokens[i].type == '('){
@@ -156,11 +157,12 @@ int main_operator(){
         case '-' : op=i;break;
       }
     }
-    if(parentheses==0 && op==0){
+    if(parentheses==0 && op==mmop){
       switch(tokens[i].type){
         case '*' : op=i;break;
         case '/' : op=i;break;
       }
+      mmop=op;
     }
 
   }
