@@ -180,8 +180,11 @@ uint32_t eval(int p,int q){
   else if(p == q){
     return atoi(tokens[p].str);
   }
-  else if(check_parentheses(p,q) == true){
-    return eval(p+1,q-1);
+  else if(check_parentheses(p,op-1) == true){
+    return eval(p+1,op-2);
+  }
+  else if(check_parentheses(op+1,q) == true){
+    return eval(op+2,q-1);
   }
   else{
     int val1 = eval(p,op-1);
