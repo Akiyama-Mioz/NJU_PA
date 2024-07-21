@@ -183,7 +183,6 @@ uint32_t eval(int p,int q){
     return eval(p+1,nr_token-1);
   }
   else{
-    printf("%d  %d  %d  %d\n",p,op-1,op+1,q);
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
     int val2 = eval(op+1,q);
