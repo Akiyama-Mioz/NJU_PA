@@ -204,7 +204,7 @@ word_t expr(char *e, bool *success) {
     return 0;
   } 
   for(int i=0;i<nr_token;i++){
-    printf("%d\n",tokens[i].type);
+    printf("%s\n",tokens[i].str);
   }
   assert(0);
   sum = eval(0,nr_token-1);
