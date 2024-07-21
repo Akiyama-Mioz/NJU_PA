@@ -171,7 +171,7 @@ uint32_t eval(int p,int q){
     return 0;
   }
   else if(p == q){
-    printf("val1 = %d\n",tokens[p].type);
+    printf("p = %d  val1 = %d\n",p,tokens[p].type);
     return tokens[p].type;
   }
   else if(check_parentheses(0,nr_token) == true){
