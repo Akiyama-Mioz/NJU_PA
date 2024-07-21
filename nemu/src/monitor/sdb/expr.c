@@ -138,11 +138,11 @@ bool check_parentheses(int p,int q){
   return false;
 }
 
-int main_operator(int n){
+int main_operator(int k){
   int parentheses = 0;//设计一个括号标记符，用于追踪括号
   int mmop=0;
   int op = 0;
-  for(int i=0;i<n;i++){
+  for(int i=0;i<k;i++){
     if(tokens[i].type == '('){
         ++parentheses;
         continue;
@@ -171,6 +171,7 @@ int main_operator(int n){
 
 uint32_t eval(int p,int q){
   int sum = 0;
+  int op = main_operator(q);
   if(p > q){
     return 0;
   }
@@ -182,8 +183,6 @@ uint32_t eval(int p,int q){
     return eval(p+1,nr_token-1);
   }
   else{
-    int op =nr_token+1;
-    op = main_operator(op-1);
     printf("%d  %d  %d  %d\n",p,op-1,op+1,q);
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
