@@ -132,6 +132,7 @@ static bool make_token(char *e) {
 }
 
 bool check_parentheses(int p,int q){
+  printf("p = %d, q = %d\n",p,q);
   if(p =='(' && q ==')'){
      return true;
   }
