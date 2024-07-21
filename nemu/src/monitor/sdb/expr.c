@@ -207,12 +207,11 @@ word_t expr(char *e, bool *success) {
   }
   printf("%d\n",nr_token);
 
-  for(int i=0;i<5;i++){
+  for(int i=0;i<nr_token;i++){
     printf("%s\n",tokens[i].str);
   }
   int op = main_operator();
   printf("%d\n",op);
-  assert(0);
   sum = eval(0,nr_token-1);
   /* TODO: Insert codes to evaluate the expression. */
   assert(0);
