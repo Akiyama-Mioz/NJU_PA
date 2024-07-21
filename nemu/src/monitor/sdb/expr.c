@@ -182,8 +182,8 @@ uint32_t eval(int p,int q){
   else{
     int op = main_operator();
     printf("%d\n",op);
-    int val1 = eval(atoi(tokens[p].str),atoi(tokens[op-1].str));
-    int val2 = eval(atoi(tokens[op+1].str),atoi(tokens[nr_token].str));
+    int val1 = eval(p,op-1);
+    int val2 = eval(op+1,q);
     switch (tokens[op].type){
       case '+': return val1 + val2;break;
       case '-': return val1 - val2;break;
