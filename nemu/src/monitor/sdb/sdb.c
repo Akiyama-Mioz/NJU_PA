@@ -96,7 +96,8 @@ static int cmd_x(char *args){
 static int cmd_p(char *args){
   bool success;
   if(args!=NULL){
-    printf("%d\n",expr(args,&success));
+    int n=expr(args,&success);
+    printf("%d\n",n);
   }
   return 0;
 }
