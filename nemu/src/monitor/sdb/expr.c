@@ -183,17 +183,17 @@ uint32_t eval(int p,int q){
   }
   else{
     int op = main_operator();
-    int val1 = eval(p,op-1);
-    printf("val1 = %d\n",val1);
+    //int val1 = eval(p,op-1);
+    //printf("val1 = %d\n",val1);
     int val2 = eval(op+1,q);
     printf("val2 = %d\n",val2);
-    switch (tokens[op].type){
-      case '+':{sum = val1+val2;break;}
-      case '-':{sum = val1-val2;break;}
-      case '*':{sum = val1*val2;break;}
-      case '/':{sum = val1/val2;break;}
-      default: printf("Invalid operator in expression!");assert(0);
-    }
+  // switch (tokens[op].type){
+  //   case '+':{sum = val1+val2;break;}
+  //   case '-':{sum = val1-val2;break;}
+  //   case '*':{sum = val1*val2;break;}
+  //   case '/':{sum = val1/val2;break;}
+  //   default: printf("Invalid operator in expression!");assert(0);
+  //  }
   }
   return sum;
 }
