@@ -181,7 +181,8 @@ uint32_t eval(int p,int q){
     printf("op = %d\n",op);
     int val1 = eval(tokens[p].type,tokens[op-1].type);
     int val2 = eval(tokens[op+1].type,tokens[nr_token].type);
-
+    printf("val1 = %d  val2 = %d\n",val1,val2);
+    assert(0);
     switch (tokens[op].type){
       case '+': return val1 + val2;break;
       case '-': return val1 - val2;break;
