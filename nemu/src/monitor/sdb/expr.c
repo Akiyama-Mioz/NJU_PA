@@ -73,7 +73,7 @@ typedef struct token {
   char str[32];
 } Token;
 
-static Token tokens[32] __attribute__((used)) = {};
+static Token tokens[500] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -90,8 +90,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s %d",
-            i, rules[i].regex, position, substr_len, substr_len, substr_start,e[position]);
+        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s ",
+            i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
 
@@ -100,29 +100,23 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
         
-        printf("%d",e[position]);
         switch (rules[i].token_type) {
-          case TK_NOTYPE : tokens[nr_token].type=TK_NOTYPE;
-          printf("%d",rules[i].token_type);break;
-          case '+' : tokens[nr_token].type='+';
-          printf("%d",rules[i].token_type);break;
-          case '-' : tokens[nr_token].type='-';
-          printf("%d",rules[i].token_type);break;
-          case '*' : tokens[nr_token].type='*';
-          printf("%d",rules[i].token_type);break;
-          case '/' : tokens[nr_token].type='/';
-          printf("%d",rules[i].token_type);break;
-          case '(' : tokens[nr_token].type='(';
-          printf("%d",rules[i].token_type);break;
-          case ')' : tokens[nr_token].type=')';
-          printf("%d",rules[i].token_type);break;
-          case TK_NUM : tokens[nr_token].type=TK_NUM;tokens[i].str[0]=rules[i].token_type;
-          printf("%d",rules[i].token_type);break;
-          case TK_EQ : tokens[nr_token].type=TK_EQ;
-          printf("%d",rules[i].token_type);break;
-          default : TODO();
+          case TK_NOTYPE : break;
+//          case '+' : tokens[nr_token].type=rules[i].token_type;nr_token++;break;
+//          case '-' : tokens[nr_token].type=rules[i].token_type;nr_token++;break;
+//          case '*' : tokens[nr_token].type=rules[i].token_type;nr_token++;break;
+//          case '/' : tokens[nr_token].type=rules[i].token_type;nr_token++;break;
+//          case '(' : tokens[nr_token].type=rules[i].token_type;nr_token++;break;
+//          case ')' : tokens[nr_token].type=rules[i].token_type;nr_token++;break;
+//          case TK_NUM : tokens[nr_token].type=TK_NUM;tokens[nr_token].str[0]=e[position];break;
+//          case TK_EQ : tokens[nr_token].type=e[position];break;
+          default : {
+              tokens[nr_token].type=rules[i].token_type;
+              strncpy(tokens[nr_token].str,substr_start,substr_len);
+              nr_token++;
+              break;
+          }
         }
-        nr_token++;
         break;
       }
     }
@@ -142,16 +136,10 @@ bool check_parentheses(int p,int q){
   }
   return false;
 }
-typedef struct {
-  int op;
-  int op_token;
-}op;
 
-op main_operator(){
+int main_operator(){
   int parentheses = 0;//设计一个括号标记符，用于追踪括号
-  op val;
-  val.op=0;
-  val.op_token=0;
+  int op = 0;
   for(int i=0;i<nr_token;i++){
     if(tokens[i].type == '('){
         ++parentheses;
@@ -163,41 +151,38 @@ op main_operator(){
     } 
     if(parentheses==0){
       switch(tokens[i].type){
-        case '+' : val.op=tokens[i].type;break;
-        case '-' : val.op=tokens[i].type;break;
+        case '+' : op=i;break;
+        case '-' : op=i;break;
       }
-      val.op_token = i;
     }
-    if(parentheses==0 && val.op==0){
+    if(parentheses==0 && op==0){
       switch(tokens[i].type){
-        case '*' : val.op=tokens[i].type;break;
-        case '/' : val.op=tokens[i].type;break;
+        case '*' : op=i;break;
+        case '/' : op=i;break;
       }
-      val.op_token = i;
     }
 
   }
-  return val;
+  return op;
 }
 
-uint32_t eval(){
-  if(tokens[0].type > tokens[nr_token].type){
+uint32_t eval(int p,int q){
+  if(p > q){
     return 0;
   }
-  if(tokens[0].type == tokens[nr_token].type){
-    return tokens[0].type;
+  else if(p == q){
+    return 0;
   }
-  if(check_parentheses(tokens[0].type,tokens[nr_token].type) == true){
-    return eval(tokens[0].type+1,tokens[nr_token].type-1);
+  else if(check_parentheses(0,nr_token) == true){
+    return eval(0+1,nr_token-1);
   }
   else{
-    op val = main_operator();
-    int op=val.op;
-    int op_token=val.op_token;
+    int op = main_operator();
+
     int val1 = eval(tokens[0].type,op - 1);
     int val2 = eval(op + 1,tokens[nr_token].type);
 
-    switch (op_token){
+    switch (tokens[op].type){
       case '+': return val1 + val2;
       case '-': return val1 - val2;
       case '*': return val1 * val2;
@@ -213,7 +198,7 @@ word_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   } 
-  eval();
+  eval(0,nr_token);
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
