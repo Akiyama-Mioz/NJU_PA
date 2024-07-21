@@ -138,11 +138,11 @@ bool check_parentheses(int p,int q){
   return false;
 }
 
-int main_operator(int k){
+int main_operator(int p,int q){
   int parentheses = 0;//设计一个括号标记符，用于追踪括号
   int mmop=0;
   int op = 0;
-  for(int i=0;i<k;i++){
+  for(int i=p;i<q+1;i++){
     if(tokens[i].type == '('){
         ++parentheses;
         continue;
@@ -175,14 +175,13 @@ uint32_t eval(int p,int q){
     return 0;
   }
   else if(p == q){
-    printf("val = %d\n",atoi(tokens[p].str));
     return atoi(tokens[p].str);
   }
   else if(check_parentheses(0,nr_token) == true){
     return eval(p+1,nr_token-1);
   }
   else{
-    int op = main_operator(q);
+    int op = main_operator(p,q);
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
     int val2 = eval(op+1,q);
