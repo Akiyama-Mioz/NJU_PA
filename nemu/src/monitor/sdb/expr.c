@@ -191,7 +191,7 @@ uint32_t eval(int p,int q){
       case '-':{sum = val1-val2;break;}
       case '*':{sum = val1*val2;break;}
       case '/':{sum = val1/val2;break;}
-      default: printf("%d",tokens[op].type);break;
+      default: printf("Invalid operator in expression!");assert(0);
     }
   }
   return sum;
