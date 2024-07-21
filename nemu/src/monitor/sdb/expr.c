@@ -175,7 +175,7 @@ uint32_t eval(int p,int q){
     return 0;
   }
   else if(p == q){
-    printf("p = %d\n",atoi(tokens[p].str));
+    printf("val = %d\n",atoi(tokens[p].str));
     return atoi(tokens[p].str);
   }
   else if(check_parentheses(0,nr_token) == true){
