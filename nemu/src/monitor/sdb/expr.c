@@ -177,8 +177,8 @@ uint32_t eval(int p,int q){
   else if(p == q){
     return atoi(tokens[p].str);
   }
-  else if(check_parentheses(0,nr_token) == true){
-    return eval(p+1,nr_token-1);
+  else if(check_parentheses(p,q) == true){
+    return eval(p+1,q-1);
   }
   else{
     int op = main_operator(p,q);
