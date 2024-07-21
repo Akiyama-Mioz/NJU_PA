@@ -171,7 +171,7 @@ uint32_t eval(int p,int q){
     return 0;
   }
   else if(p == q){
-    return 0;
+    return tokens[p].type;
   }
   else if(check_parentheses(0,nr_token) == true){
     return eval(0+1,nr_token-1);
@@ -179,8 +179,8 @@ uint32_t eval(int p,int q){
   else{
     int op = main_operator();
 
-    int val1 = eval(tokens[0].type,op - 1);
-    int val2 = eval(op + 1,tokens[nr_token].type);
+    int val1 = eval(tokens[p].type,tokens[op-1].type);
+    int val2 = eval(tokens[op+1].type,tokens[nr_token].type);
 
     switch (tokens[op].type){
       case '+': return val1 + val2;break;
