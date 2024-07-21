@@ -184,6 +184,7 @@ uint32_t eval(int p,int q){
     int val1 = eval(p,op-1);
     printf("val1 = %d\n",val1);
     int val2 = eval(op+1,q);
+    printf("val2 = %d\n",val2);
     switch (tokens[op].type){
       case '+':{sum = val1+val2;break;}
       case '-':{sum = val1-val2;break;}
