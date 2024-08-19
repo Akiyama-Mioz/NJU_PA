@@ -19,7 +19,7 @@
 #include <readline/history.h>
 #include "sdb.h"
 
-static int is_batch_mode = false;
+static int is_batch_mode = false;//程序是否自动执行,false为否
 
 void init_regex();
 void init_wp_pool();
@@ -54,6 +54,55 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args){
+  printf("%s\n",args);//如果定义一个指向字符串的指针，那么这个指针指向的是一个字符串的首地址，打印时也只需要地址
+  int n=atoi(args);//字符串转换为整数
+  if(args!=NULL){
+    for(int i=0;i<n;i++){
+      cpu_exec(1);
+    }
+  }
+  return 0;
+}
+
+/*打印寄存器的信息*/
+static int cmd_info(char *args){
+
+  if(args!=NULL){
+    if(*args=='r'){
+      isa_reg_display();
+    }
+  }
+  return 0;
+}
+
+word_t vaddr_read(vaddr_t addr, int len);
+
+/*扫描内存*/
+
+static int cmd_x(char *args){
+  int  n1;
+  unsigned int  n2;
+  if(args!=NULL){
+    sscanf(args,"%d %x",&n1,&n2);
+    for(int i=0;i<n1;i++){
+      printf("0x%x: 0x%x\n",n2,vaddr_read(n2,4));
+      n2+=4;
+    } 
+  }
+  return 0;
+}
+
+static int cmd_p(char *args){
+  bool success;
+  if(args!=NULL){
+    int n=expr(args,&success);
+    printf("%d\n",n);
+  }
+  return 0;
+}
+
+/*指令的名称、指令的描述、指令的处理函数结合在一起的结构体*/
 static struct {
   const char *name;
   const char *description;
@@ -62,9 +111,10 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
-  /* TODO: Add more commands */
-
+  {"si","Single step execution",cmd_si},
+  {"info","Print the information of registers",cmd_info},
+  {"x","Calculate the expression",cmd_x},
+  {"p","Print the expression",cmd_p},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -91,7 +141,7 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
-
+/*改变程序的模式，调用这个函数会使得程序自动执行 */
 void sdb_set_batch_mode() {
   is_batch_mode = true;
 }

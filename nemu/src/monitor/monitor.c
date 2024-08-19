@@ -32,8 +32,6 @@ static void welcome() {
   Log("Build time: %s, %s", __TIME__, __DATE__);
   printf("Welcome to %s-NEMU!\n", ANSI_FMT(str(__GUEST_ISA__), ANSI_FG_YELLOW ANSI_BG_RED));
   printf("For help, type \"help\"\n");
-  Log("Exercise: Please remove me in the source code and compile NEMU again.");
-  assert(0);
 }
 
 #ifndef CONFIG_TARGET_AM
@@ -99,9 +97,9 @@ static int parse_args(int argc, char *argv[]) {
 }
 
 void init_monitor(int argc, char *argv[]) {
-  /* Perform some global initialization. */
+  /* Perform some global initialization. *///执行全局初始化
 
-  /* Parse arguments. */
+  /* Parse arguments. *///解析参数
   parse_args(argc, argv);
 
   /* Set random seed. */
